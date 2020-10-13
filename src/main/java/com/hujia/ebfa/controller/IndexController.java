@@ -1,7 +1,18 @@
 package com.hujia.ebfa.controller;
 
+import com.alibaba.excel.EasyExcel;
+import com.hujia.ebfa.Listener.UploadDataListener;
+import com.hujia.ebfa.domain.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+
 /**
  * @PackageName:com.hujia.ebfa.controller
  * @ClassName:IndexController
@@ -16,5 +27,14 @@ public class IndexController {
     String index() {
 
         return "index";
+    }
+
+    @RequestMapping("/importExp")
+    @ResponseBody
+    public String importExp(@RequestParam("file") MultipartFile file) throws IOException {
+        System.err.println(file.getOriginalFilename());
+
+        EasyExcel.read(file.getInputStream(), Test.class, new UploadDataListener()).sheet().doRead();
+        return "01";
     }
 }
