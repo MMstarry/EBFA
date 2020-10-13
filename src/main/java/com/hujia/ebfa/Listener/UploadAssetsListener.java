@@ -2,7 +2,7 @@ package com.hujia.ebfa.Listener;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.hujia.ebfa.domain.Test;
+import com.hujia.ebfa.domain.Assets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,9 @@ import com.alibaba.fastjson.JSON;
  * @author:Starry the Night
  * @Date:2020/10/13 15:27
  */
-public class UploadDataListener extends AnalysisEventListener<Test> {
+public class UploadAssetsListener extends AnalysisEventListener<Assets> {
 
-    List<Test> list = new ArrayList<>();
+    List<Assets> list = new ArrayList<>();
 
     /**
      * 这个每一条数据解析都会来调用
@@ -28,7 +28,7 @@ public class UploadDataListener extends AnalysisEventListener<Test> {
      * @return void
      */
     @Override
-    public void invoke(Test data, AnalysisContext analysisContext) {
+    public void invoke(Assets data, AnalysisContext analysisContext) {
         System.err.println("解析到一条数据:{}"+JSON.toJSONString(data));
         list.add(data);
     }

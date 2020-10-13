@@ -11,7 +11,7 @@ import lombok.Data;
  * @Date:2020/10/13 15:21
  */
 @Data
-public class Test {
+public class Assets {
     @ExcelProperty("资产编号")
     private String name;
 }
