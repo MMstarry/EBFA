@@ -17,7 +17,7 @@ class EbfaApplicationTests {
         List<Assets> list = new ArrayList<Assets>();
         for (int i = 0; i < 10; i++) {
             Assets data = new Assets();
-            data.setName("字符串" + i);
+            data.setAssetsName("字符串" + i);
             list.add(data);
         }
         return list;
@@ -26,8 +26,9 @@ class EbfaApplicationTests {
     @Test
     void contextLoads() {
 
-        String fileName =  "C:\\Users\\Administrator\\Desktop\\simpleWrite.xlsx";
-        EasyExcel.write(fileName, Assets.class).sheet("模板").doWrite(data());
+        /*String fileName =  "C:\\Users\\Administrator\\Desktop\\simpleWrite.xlsx";
+        EasyExcel.write(fileName, Assets.class).sheet("模板").doWrite(data());*/
     }
 
 }
+

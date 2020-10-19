@@ -2,6 +2,7 @@ package com.hujia.ebfa.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.hujia.ebfa.Listener.UploadAssetsListener;
+import com.hujia.ebfa.Utils.GlobalUtil;
 import com.hujia.ebfa.domain.Assets;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,15 +26,27 @@ public class IndexController {
     @GetMapping({ "/index" })
     String index() {
 
+
         return "index";
     }
 
+    /**
+     * execl上传
+     * @param file
+     * @Author: Starry the Night
+     * @Date:  2020/10/13 16:17
+     * @return java.lang.String
+     */
     @RequestMapping("/importExp")
     @ResponseBody
     public String importExp(@RequestParam("file") MultipartFile file) throws IOException {
-        System.err.println(file.getOriginalFilename());
+
 
         EasyExcel.read(file.getInputStream(), Assets.class, new UploadAssetsListener()).sheet().doRead();
+
+
         return "01";
     }
+
+
 }
