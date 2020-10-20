@@ -1,4 +1,4 @@
-package com.hujia.ebfa.utils;
+package com.hujia.ebfa.Utils;
 
 import java.io.Serializable;
 import java.util.List;

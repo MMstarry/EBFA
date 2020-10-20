@@ -27,7 +27,7 @@ public class Assets {
     private String assetsName;
 
     @ExcelProperty("财务入账日期")
-    private Date financialEntryDate;
+    private String financialEntryDate;
 
     @ExcelProperty("价值类型")
     private String valueType;
@@ -39,7 +39,7 @@ public class Assets {
     private String acquiredMode;
 
     @ExcelProperty("取得日期")
-    private Date acquiredDate;
+    private String acquiredDate;
 
     @ExcelProperty("使用状况")
     private String useStatus;

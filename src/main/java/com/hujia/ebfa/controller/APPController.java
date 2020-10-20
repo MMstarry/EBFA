@@ -1,6 +1,7 @@
 package com.hujia.ebfa.controller;
 
 import com.hujia.ebfa.Listener.UploadAssetsListener;
+import com.hujia.ebfa.Utils.GlobalUtil;
 import com.hujia.ebfa.domain.Assets;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class APPController {
     @GetMapping("/get")
     public Assets get(String code) {
 
-        List<Assets> data = UploadAssetsListener.list;
+        List<Assets> data = GlobalUtil.assetsList;
         Assets assets = data.stream().filter(o -> o.getAssetsCode().equals(code)).findAny().orElse(null);
         return assets;
     }

@@ -1,7 +1,7 @@
 package com.hujia.ebfa;
 
 
-import com.hujia.ebfa.utils.GlobalUtil;
+import com.hujia.ebfa.Utils.GlobalUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

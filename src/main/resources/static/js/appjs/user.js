@@ -27,6 +27,8 @@ $(function () {
                }
            });
            $("#upFile").val('')
+
+           reLoad();
        }
     });
 
@@ -118,14 +120,7 @@ function load() {
                     },
                     {
                         field: 'value',
-                        title: '价值 ',
-                        formatter: function (value, row, index) {
-                            if (value == '0') {
-                                return '<span class="label label-danger">禁用</span>';
-                            } else if (value == '1') {
-                                return '<span class="label label-primary">正常</span>';
-                            }
-                        }
+                        title: '价值 '
                     },
                     {
                         field: 'acquiredMode',

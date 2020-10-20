@@ -2,10 +2,10 @@ package com.hujia.ebfa.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.hujia.ebfa.Listener.UploadAssetsListener;
-import com.hujia.ebfa.utils.GlobalUtil;
+import com.hujia.ebfa.Utils.GlobalUtil;
 import com.hujia.ebfa.domain.Assets;
-import com.hujia.ebfa.utils.Hex;
-import com.hujia.ebfa.utils.PageUtils;
+import com.hujia.ebfa.Utils.Hex;
+import com.hujia.ebfa.Utils.PageUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,23 +76,23 @@ public class IndexController {
         params.put("offset", offset);
         params.put("page", offset / limit + 1);
         params.put("limit", limit);
-        List<Assets> list = UploadAssetsListener.list;
+        List<Assets> list = GlobalUtil.assetsList;
 
         if (list.size() == 0) return null;
-        if (!params.get("assetsCode").equals("assetsCode") || params.get("assetsCode")!=null ) {
+        if (!params.get("assetsCode").equals("") ) {
            list = list.stream().filter(e -> e.getAssetsCode().equals(params.get("assetsCode"))).collect(Collectors.toList());
         }
-        if (!params.get("classification").equals("classification") || params.get("classification")!=null ) {
+        if (!params.get("classification").equals("")) {
             list = list.stream().filter(e -> e.getClassification().equals(params.get("classification"))).collect(Collectors.toList());
         }
-        if (!params.get("assetsName").equals("assetsName") || params.get("assetsName")!=null ) {
+        if (!params.get("assetsName").equals("") ) {
             list = list.stream().filter(e -> e.getAssetsName().indexOf(params.get("assetsName").toString())!=-1).collect(Collectors.toList());
         }
-        if (!params.get("acquiredDate").equals("acquiredDate") || params.get("acquiredDate")!=null ) {
+        if (!params.get("acquiredDate").equals("") ) {
             list = list.stream().filter(e -> e.getAcquiredDate().equals(params.get("acquiredDate"))).collect(Collectors.toList());
         }
 
-        int total = UploadAssetsListener.list.size();
+        int total = list.size();
         List<Assets> assets = new ArrayList<>();
         if (total > (offset + limit)) {
             assets = list.subList(offset, offset + limit);

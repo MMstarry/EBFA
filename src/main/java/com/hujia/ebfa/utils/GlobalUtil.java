@@ -1,4 +1,4 @@
-package com.hujia.ebfa.utils;
+package com.hujia.ebfa.Utils;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.constant.ExcelXmlConstants;
@@ -28,10 +28,7 @@ public class GlobalUtil {
      */
     public static List<Assets> assetsList=new ArrayList<>();
 
-    /**
-     * 全部资产信息 map 手持机查询时使用
-     */
-    public static Map<String,Assets> assetsMap=new HashMap<>();
+
 
     /**
      * 已打印的资产信息 list 两集合差集就是未打印的资产
@@ -43,9 +40,6 @@ public class GlobalUtil {
        assetsList=assets;
     }
 
-    public static void assetsMapAdd(Assets asset){
-        assetsMap.put(asset.getAssetsCode(),asset);
-    }
 
 
     public static void printedAssetsListAdd(Assets asset){
