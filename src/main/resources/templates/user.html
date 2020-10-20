@@ -4,6 +4,7 @@
 <link href="/css/bootstrap/bootstrap.min.css"  rel="stylesheet">
 <link href="/css/bootstrap/bootstrap-table.min.css"  rel="stylesheet">
 <link href="/css/bootstrap/bootstrap-table.css"  rel="stylesheet">
+<link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/style.css"  rel="stylesheet">
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
@@ -22,14 +23,27 @@
 									<input placeholder="资产类型" name="classification" id="classification" type="text" class="form-control " style="width: 240px;"></td>
 
 								<td style="margin-top: 10px;">
+									免费试用时间：
 									<div class="columns pull-right">
 									<input type="file" id="upFile" hidden name="upFile" placeholder=""/>
-									<button  class="btn btn-primary" onclick="importExp()">导入</button>
-									<button class="btn btn-success" onclick="Export()">下载</button>
+
 									</div>
 								</td>
-								<td >
-									免费试用时间：
+								<td style="margin-left: 20px">
+									<!-- Example single danger button -->
+									<div class="btn-group">
+										<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<li class="fa fa-cog">设置</li>
+										</button>
+										<div class="dropdown-menu">
+<!--                                            -->
+<!--											<a class="dropdown-item" href="#">Another action</a>-->
+<!--											<a class="dropdown-item" href="#">Something else here</a>-->
+											<div class="dropdown-divider"></div>
+											<button  class="dropdown-item" onclick="importExp()">导入</button>
+											<button class="dropdown-item" onclick="setParam()">读写器设置</button>
+										</div>
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -40,9 +54,10 @@
 								<td style="float: right;margin-top: 10px;" >取得日期：</td>
 								<td><input id="acquiredDate" name="acquiredDate" placeholder="取得日期" class="laydate-icon layer-date form-control" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" type="text"></td>
 								<td>
-									<div class="columns pull-right">
+									<div class="columns pull-left">
+										<button class="btn btn-success" onclick="Export()">下载</button>
 										<button  class="btn btn-primary" onclick="exportAsset()">打印</button>
-										<button class="btn btn-success" onclick="select()">查询</button>
+										<button class="btn btn-success" onclick="reLoad()">查询</button>
 										<button class="btn btn-success" onclick="clear1()">清空</button>
 									</div>
 								</td>
@@ -81,6 +96,7 @@
 		</div>
 	</div>
 	<script src="/js/jquery.min.js" ></script>
+    <script src="/js/bootstrap/popper.min.js" ></script>
 	<script src="/js/bootstrap/bootstrap.min.js" ></script>
 
 	<script src="/js/layer/layer.js" ></script>

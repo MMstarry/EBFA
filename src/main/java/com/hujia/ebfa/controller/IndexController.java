@@ -7,10 +7,7 @@ import com.hujia.ebfa.domain.Assets;
 import com.hujia.ebfa.Utils.Hex;
 import com.hujia.ebfa.Utils.PageUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -139,5 +136,20 @@ public class IndexController {
             s = Hex.str2HexStr("0"+code);
         }
         return s;
+    }
+
+
+    @GetMapping("/setWriter")
+    String setWriter() {
+        return "device";
+    }
+
+    @PostMapping("/getRow")
+    @ResponseBody
+    void getRow(String code) {
+
+        Assets assets = GlobalUtil.assetsList.stream().filter(o -> o.getAssetsCode().equals(code)).findAny().orElse(null);
+        System.out.println(assets);
+
     }
 }
