@@ -87,7 +87,7 @@ public class IndexController {
             list = list.stream().filter(e -> e.getAssetsName().indexOf(params.get("assetsName").toString())!=-1).collect(Collectors.toList());
         }
         if (!params.get("acquiredDate").equals("") ) {
-            list = list.stream().filter(e -> e.getAcquiredDate().equals(params.get("acquiredDate"))).collect(Collectors.toList());
+            list = list.stream().filter(e -> e.getFinancialEntryDate().equals(params.get("acquiredDate"))).collect(Collectors.toList());
         }
 
         int total = list.size();

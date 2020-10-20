@@ -99,36 +99,28 @@ function load() {
                         title: '资产编号'
                     },
                     {
-                        field: 'nationalStandardClassification',
-                        title: '资产国标大类'
-                    },
-                    {
-                        field: 'classification',
-                        title: '资产分类'
-                    },
-                    {
                         field: 'assetsName',
                         title: '资产名称'
                     },
                     {
-                        field: 'financialEntryDate',
-                        title: '财务入账日期'
+                        field: 'brand',
+                        title: '品牌'
                     },
                     {
-                        field: 'valueType',
-                        title: '价值类型'
+                        field: 'spec',
+                        title: '规格型号'
                     },
                     {
                         field: 'value',
                         title: '价值 '
                     },
                     {
-                        field: 'acquiredMode',
-                        title: '取得方式'
+                        field: 'classification',
+                        title: '资产分类'
                     },
                     {
-                        field: 'acquiredDate',
-                        title: '取得日期'
+                        field: 'use',
+                        title: '设备用途'
                     },
                     {
                         field: 'useStatus',
@@ -139,9 +131,14 @@ function load() {
                         title: '使用部门'
                     },
                     {
-                        field: 'managementDepartment',
-                        title: '管理部门'
+                        field: 'user',
+                        title: '使用人'
                     },
+                    {
+                        field: 'financialEntryDate',
+                        title: '购置时间'
+                    },
+
                     {
                         field : 'flag',
                         title: '是否已写入',
