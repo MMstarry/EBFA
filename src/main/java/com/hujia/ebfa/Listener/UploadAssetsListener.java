@@ -3,7 +3,7 @@ package com.hujia.ebfa.Listener;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.hujia.ebfa.Utils.GlobalUtil;
+import com.hujia.ebfa.utils.GlobalUtil;
 import com.hujia.ebfa.domain.Assets;
 
 import java.io.File;
@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSON;
  */
 public class UploadAssetsListener extends AnalysisEventListener<Assets> {
 
-    List<Assets> list = new ArrayList<>();
+   public static List<Assets> list = new ArrayList<>();
 
     /**
      * 这个每一条数据解析都会来调用

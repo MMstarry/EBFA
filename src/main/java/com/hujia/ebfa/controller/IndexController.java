@@ -2,8 +2,10 @@ package com.hujia.ebfa.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.hujia.ebfa.Listener.UploadAssetsListener;
-import com.hujia.ebfa.Utils.GlobalUtil;
+import com.hujia.ebfa.utils.GlobalUtil;
 import com.hujia.ebfa.domain.Assets;
+import com.hujia.ebfa.utils.Hex;
+import com.hujia.ebfa.utils.PageUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @PackageName:com.hujia.ebfa.controller
@@ -48,5 +57,81 @@ public class IndexController {
         return "01";
     }
 
+    @GetMapping({ "/user" })
+    String user() {
+        return "user";
+    }
 
+    /**
+     * 分页
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/list")
+    public PageUtils list(@RequestParam Map<String, Object> params){
+
+        int offset = Integer.parseInt(params.get("offset").toString());
+        int limit = Integer.parseInt(params.get("limit").toString());
+        params.put("offset", offset);
+        params.put("page", offset / limit + 1);
+        params.put("limit", limit);
+        List<Assets> list = UploadAssetsListener.list;
+
+        if (list.size() == 0) return null;
+        if (!params.get("assetsCode").equals("assetsCode") || params.get("assetsCode")!=null ) {
+           list = list.stream().filter(e -> e.getAssetsCode().equals(params.get("assetsCode"))).collect(Collectors.toList());
+        }
+        if (!params.get("classification").equals("classification") || params.get("classification")!=null ) {
+            list = list.stream().filter(e -> e.getClassification().equals(params.get("classification"))).collect(Collectors.toList());
+        }
+        if (!params.get("assetsName").equals("assetsName") || params.get("assetsName")!=null ) {
+            list = list.stream().filter(e -> e.getAssetsName().indexOf(params.get("assetsName").toString())!=-1).collect(Collectors.toList());
+        }
+        if (!params.get("acquiredDate").equals("acquiredDate") || params.get("acquiredDate")!=null ) {
+            list = list.stream().filter(e -> e.getAcquiredDate().equals(params.get("acquiredDate"))).collect(Collectors.toList());
+        }
+
+        int total = UploadAssetsListener.list.size();
+        List<Assets> assets = new ArrayList<>();
+        if (total > (offset + limit)) {
+            assets = list.subList(offset, offset + limit);
+        } else {
+            assets = list.subList(offset, total);
+        }
+
+
+
+        PageUtils pageUtils = new PageUtils(assets, total);
+        return pageUtils;
+    }
+
+
+    @GetMapping("/downLoad")
+    @ResponseBody
+    public void exportPromotionByExcel07(HttpServletResponse response) throws IOException {
+
+
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+
+        // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+        String fileName = URLEncoder.encode("盘点", "UTF-8");
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+
+
+        EasyExcel.write(response.getOutputStream(), Assets.class).sheet("sheet1").doWrite(UploadAssetsListener.list);
+    }
+
+    @GetMapping("/getHEX")
+    @ResponseBody
+    String getHEX(@RequestParam String code) {
+        String s = "";
+        if (code.length() % 2 == 0) {
+            s = Hex.str2HexStr(code);
+        } else {
+            s = Hex.str2HexStr("0"+code);
+        }
+        return s;
+    }
 }
