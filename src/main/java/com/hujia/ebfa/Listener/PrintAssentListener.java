@@ -8,22 +8,17 @@ import com.hujia.ebfa.domain.Assets;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import com.alibaba.fastjson.JSON;
 
 /**
  * @PackageName:com.hujia.ebfa.Listener
- * @ClassName:UploadDataListener
+ * @ClassName:PrintAssentListener
  * @Description:
  * @author:Starry the Night
- * @Date:2020/10/13 15:27
+ * @Date:2020/10/20 11:35
  */
-public class UploadAssetsListener extends AnalysisEventListener<Assets> {
-
-   public static List<Assets> list = new ArrayList<>();
+public class PrintAssentListener extends AnalysisEventListener<Assets> {
+    public static List<Assets> list = new ArrayList<>();
 
     /**
      * 这个每一条数据解析都会来调用
@@ -50,35 +45,16 @@ public class UploadAssetsListener extends AnalysisEventListener<Assets> {
      */
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
-        System.err.println("全部数据解析完成！");
-        //System.err.println(list.toString());
+        System.err.println("已打印数据解析完成！");
 
-        System.err.println(list.size());
-
-
-
-        //全部固定资产信息
-        String fileName =  GlobalUtil.PATH+"\\assets.xlsx";
-
-        File assets=new File(fileName);
-
-        //文件不存在，创建文件
-        if(!assets.exists()){
-            try {
-                assets.createNewFile();
-                EasyExcel.write(fileName, Assets.class).sheet("资产").doWrite(list);
-            }catch (Exception e){
-
-            }
+        for(Assets assets:list){
+            assets.setFlag(true);
         }
 
-        Set<Assets> set = new HashSet<>(GlobalUtil.printedAssetsList);
-        Set<Assets> set2 = new HashSet<>(list);
-        set.addAll(set2);
+        GlobalUtil.printedAssetsList=list;
 
-        List<Assets> list_1 = new ArrayList<>(set);
 
-        GlobalUtil.setAssetsList(list_1);
+
 
     }
 }

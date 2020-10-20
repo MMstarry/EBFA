@@ -1,5 +1,6 @@
 package com.hujia.ebfa.domain;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
@@ -49,6 +50,10 @@ public class Assets {
 
     @ExcelProperty("管理部门")
     private String managementDepartment;
+
+
+    @ExcelIgnore
+    private Boolean flag=false;
 
 
 }

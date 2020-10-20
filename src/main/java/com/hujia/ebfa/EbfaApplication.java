@@ -18,7 +18,7 @@ public class EbfaApplication {
 
         GlobalUtil.create(System.getProperty("user.dir"));
 
-        System.err.println(GlobalUtil.assetsList.toString());
+
 
 
     }

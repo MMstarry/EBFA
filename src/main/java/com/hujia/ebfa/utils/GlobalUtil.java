@@ -1,16 +1,14 @@
 package com.hujia.ebfa.Utils;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.constant.ExcelXmlConstants;
+import com.hujia.ebfa.Listener.PrintAssentListener;
 import com.hujia.ebfa.Listener.UploadAssetsListener;
 import com.hujia.ebfa.domain.Assets;
 
+import javax.naming.ldap.PagedResultsControl;
 import java.io.File;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @PackageName:com.hujia.ebfa.Utils
@@ -43,6 +41,7 @@ public class GlobalUtil {
 
 
     public static void printedAssetsListAdd(Assets asset){
+        asset.setFlag(true);
         printedAssetsList.add(asset);
 
         //已经打印的资产编号
@@ -50,15 +49,16 @@ public class GlobalUtil {
 
         File printedAssents=new File(fileName);
 
-        //文件不存在，创建文件
+        //文件不存在，创建文件,添加数据
         if(!printedAssents.exists()){
             try {
                 printedAssents.createNewFile();
+                EasyExcel.write(fileName, Assets.class).sheet("资产").doWrite(printedAssetsList);
             }catch (Exception e){
 
             }
         }else {
-            //读取execl数据赋值给 printedAssetsList
+            EasyExcel.write(fileName, Assets.class).sheet("资产").doWrite(printedAssetsList);
         }
 
     }
@@ -82,12 +82,30 @@ public class GlobalUtil {
             file.mkdirs();
         }
 
+
+
+        //已打印固定资产信息
+        String print =  execlPath+"\\printedAssents.xlsx";
+
+        File printAssets=new File(print);
+
+        //文件 存在读取
+        if(printAssets.exists()){
+            try {
+                EasyExcel.read(printAssets, Assets.class, new PrintAssentListener()).sheet().doRead();
+                System.err.println(11);
+            }catch (Exception e){
+
+            }
+        }
+
+
         //全部固定资产信息
         String fileName =  execlPath+"\\assets.xlsx";
 
         File assets=new File(fileName);
 
-        //文件存在，创建文件
+        //文件存在，读取
         if(assets.exists()){
             try {
                 EasyExcel.read(assets, Assets.class, new UploadAssetsListener()).sheet().doRead();
@@ -95,6 +113,10 @@ public class GlobalUtil {
 
             }
         }
+
+
+
+
 
     }
 }

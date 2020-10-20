@@ -53,9 +53,15 @@ public class IndexController {
 
         EasyExcel.read(file.getInputStream(), Assets.class, new UploadAssetsListener()).sheet().doRead();
 
+    Assets assets=new Assets();
+    assets.setAssetsName("问问请问");
+
+    GlobalUtil.printedAssetsListAdd(assets);
 
         return "01";
     }
+
+
 
     @GetMapping({ "/user" })
     String user() {
