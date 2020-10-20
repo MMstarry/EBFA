@@ -152,7 +152,7 @@ function load() {
                     },
                     {
                         title: '操作',
-                        field: 'id',
+                        field: 'flag',
                         align: 'center',
                         formatter: function (value, row, index) {
 
@@ -162,10 +162,11 @@ function load() {
                             var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
                                 + row.assetsCode
                                 + '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h + '" href="#" title="重置密码"  mce_href="#" onclick="resetPwd(\''
+                            var f = '<a class="btn btn-warning btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="录入标签" onclick="edit(\''
                                 + row.assetsCode
-                                + '\')"><i class="fa fa-key"></i></a> ';
-                            return e;
+                                + '\')"><i class="fa fa-edit">录入标签</i></a> ';
+                            if (value === true) return e
+                            else return f
                         }
                     }],
                 formatNoMatches: function () {

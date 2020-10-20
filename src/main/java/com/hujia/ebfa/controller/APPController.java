@@ -1,6 +1,6 @@
 package com.hujia.ebfa.controller;
 
-import com.hujia.ebfa.Listener.UploadAssetsListener;
+import com.hujia.ebfa.Utils.Hex;
 import com.hujia.ebfa.Utils.GlobalUtil;
 import com.hujia.ebfa.domain.Assets;
 import org.springframework.stereotype.Controller;
@@ -30,4 +30,13 @@ public class APPController {
         Assets assets = data.stream().filter(o -> o.getAssetsCode().equals(code)).findAny().orElse(null);
         return assets;
     }
+
+    @GetMapping("/getHEX")
+    public Assets getHEX(String code) {
+
+        List<Assets> data = GlobalUtil.assetsList;
+        Assets assets = data.stream().filter(o -> o.getAssetsCode().equals(Hex.hexStr2Str(code))).findAny().orElse(null);
+        return assets;
+    }
+
 }
