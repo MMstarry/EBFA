@@ -50,11 +50,6 @@ public class IndexController {
 
         EasyExcel.read(file.getInputStream(), Assets.class, new UploadAssetsListener()).sheet().doRead();
 
-    Assets assets=new Assets();
-    assets.setAssetsName("问问请问");
-
-    GlobalUtil.printedAssetsListAdd(assets);
-
         return "01";
     }
 
@@ -123,7 +118,7 @@ public class IndexController {
         response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
 
 
-        EasyExcel.write(response.getOutputStream(), Assets.class).sheet("sheet1").doWrite(UploadAssetsListener.list);
+        EasyExcel.write(response.getOutputStream(), Assets.class).sheet("sheet1").doWrite(GlobalUtil.assetsList);
     }
 
     @GetMapping("/getHEX")
@@ -150,6 +145,7 @@ public class IndexController {
 
         Assets assets = GlobalUtil.assetsList.stream().filter(o -> o.getAssetsCode().equals(code)).findAny().orElse(null);
         System.out.println(assets);
+        GlobalUtil.printedAssetsListAdd(assets);
 
     }
 }

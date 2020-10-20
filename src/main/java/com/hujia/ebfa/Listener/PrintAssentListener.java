@@ -52,6 +52,7 @@ public class PrintAssentListener extends AnalysisEventListener<Assets> {
         }
 
         GlobalUtil.printedAssetsList=list;
+        System.err.println(list.size());
 
 
 

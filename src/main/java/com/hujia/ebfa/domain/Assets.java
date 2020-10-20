@@ -5,6 +5,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @PackageName:com.hujia.ebfa.domain
@@ -56,4 +57,16 @@ public class Assets {
     private Boolean flag=false;
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Assets assets = (Assets) o;
+        return assetsCode.equals(assets.assetsCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(assetsCode);
+    }
 }

@@ -23,7 +23,7 @@ import com.alibaba.fastjson.JSON;
  */
 public class UploadAssetsListener extends AnalysisEventListener<Assets> {
 
-   public static List<Assets> list = new ArrayList<>();
+   public  List<Assets> list = new ArrayList<>();
 
     /**
      * 这个每一条数据解析都会来调用

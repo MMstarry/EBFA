@@ -8,7 +8,9 @@ import com.hujia.ebfa.domain.Assets;
 import javax.naming.ldap.PagedResultsControl;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @PackageName:com.hujia.ebfa.Utils
@@ -44,6 +46,12 @@ public class GlobalUtil {
         asset.setFlag(true);
         printedAssetsList.add(asset);
 
+
+        Set<Assets> set=new HashSet<>(printedAssetsList);
+        Set<Assets> set2=new HashSet<>(assetsList);
+        set.addAll(set2);
+        setAssetsList(new ArrayList<>(set));
+
         //已经打印的资产编号
         String fileName =  PATH +"\\printedAssents.xlsx";
 
@@ -60,6 +68,8 @@ public class GlobalUtil {
         }else {
             EasyExcel.write(fileName, Assets.class).sheet("资产").doWrite(printedAssetsList);
         }
+
+        System.err.println(assetsList.get(0).toString());
 
     }
 
@@ -93,7 +103,7 @@ public class GlobalUtil {
         if(printAssets.exists()){
             try {
                 EasyExcel.read(printAssets, Assets.class, new PrintAssentListener()).sheet().doRead();
-                System.err.println(11);
+
             }catch (Exception e){
 
             }

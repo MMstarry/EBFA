@@ -145,8 +145,8 @@ function load() {
                     {
                         field : 'flag',
                         title: '是否已写入',
-                        formatter: function (value, row, index) {
-                           if (row === 'true') return '是'
+                        formatter: function (value) {
+                           if (value === true) return '是'
                             else return '否'
                         }
                     },
