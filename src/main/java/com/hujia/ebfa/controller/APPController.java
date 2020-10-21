@@ -48,16 +48,15 @@ public class APPController {
 
         List<String> listString = Arrays.asList(codes.split(","));
 
-
-
         GlobalUtil.codeList.addAll(listString);
 
     }
 
     @GetMapping("/clearCode")
     @ResponseBody
-    public void clearCode() {
+    public int clearCode() {
         GlobalUtil.codeList = new ArrayList<>();
+        return 200;
     }
 
 }
