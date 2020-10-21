@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,10 +44,13 @@ public class APPController {
 
     @PostMapping("/setCode")
     @ResponseBody
-    public void setCode(@RequestBody List<String> codes) {
+    public void setCode(@RequestBody String codes) {
+
+        List<String> listString = Arrays.asList(codes.split(","));
+
 
         GlobalUtil.codeList = new ArrayList<>();
-        GlobalUtil.codeList = codes;
+        GlobalUtil.codeList = listString;
 
     }
 
