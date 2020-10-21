@@ -162,8 +162,8 @@ function load() {
                             var f = '<a class="btn btn-warning btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="录入标签" onclick="edit(\''
                                 + row.assetsCode
                                 + '\')"><i class="fa fa-edit">录入标签</i></a> ';
-                            if (value === true) return e
-                            else return f
+                            if (value === true) return f;
+                            else return e;
                         }
                     }],
                 formatNoMatches: function () {
@@ -200,22 +200,22 @@ function setParam() {
     });
 }
 
+
+function scanning() {
+    layer.open({
+        type: 2,
+        title: '扫描列表',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '600px'],
+        content: '/scan' // iframe的url
+    });
+}
+
+
 function edit(row) {
 
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: "/getRow",
-        data: {
-            "code": row
-        },// 你的formid
-        async: false,
-        error: function (request) {
-            parent.layer.alert("Connection error");
-        },
-        success: function (data) {
-        }
-    });
+
 
     $.ajax({
         type: 'get',
@@ -228,7 +228,7 @@ function edit(row) {
             $.ajax({
                 data: ' {\n' +
                     '                "antenna": 1,\n' +
-                    '                "epc": "' + $('#assetCode').val() + '"\n' +
+                    '                "epc": "' + r + '"\n' +
                     '            }',
                 type: "post",
                 contentType: "application/json; charset=utf-8",
@@ -236,14 +236,27 @@ function edit(row) {
                 success: function (result) {
 
                     if (result.err_code === 0) {
-                        save();
+
+                        $.ajax({
+                            cache: true,
+                            type: "POST",
+                            url: "/getRow",
+                            data: {
+                                "code": row
+                            },// 你的formid
+                            async: false,
+                            error: function (request) {
+                                layer.alert("Connection error");
+                            },
+                            success: function (data) {
+                                reLoad();
+                            }
+                        });
                         layer.msg("写数据成功");
 
                     } else {
-                        parent.layer.msg("写数据失败,请放置标签或检查设备！")
+                        layer.msg("写数据失败,请放置标签或检查设备！")
                     }
-                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                    layer.close(index);
 
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -252,7 +265,6 @@ function edit(row) {
             });
         }
     })
-
 
 }
 

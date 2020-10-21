@@ -42,6 +42,7 @@
 											<div class="dropdown-divider"></div>
 											<button  class="dropdown-item" onclick="importExp()">导入资产</button>
 											<button class="dropdown-item" onclick="setParam()">读写器设置</button>
+											<button class="dropdown-item" onclick="scanning()">扫描列表</button>
 										</div>
 									</div>
 								</td>
@@ -52,7 +53,7 @@
 									<input id="assetsCode" name="assetsCode" placeholder="资产编号" class="form-control" style="width: 240px;" type="text">
 								</td>
 								<td style="float: right;margin-top: 10px;" >取得日期：</td>
-								<td><input id="acquiredDate" name="acquiredDate" placeholder="取得日期" class="laydate-icon layer-date form-control" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" type="text"></td>
+								<td><input id="acquiredDate" name="acquiredDate" placeholder="取得日期" class="laydate-icon layer-date form-control" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" type="text"></td>
 								<td>
 									<div class="columns pull-left">
 										<button class="btn btn-success" onclick="Export()">下载</button>

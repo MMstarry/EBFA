@@ -148,4 +148,27 @@ public class IndexController {
         GlobalUtil.printedAssetsListAdd(assets);
 
     }
+
+
+    @GetMapping("/scan")
+    String scan() {
+        return "scan";
+    }
+
+    /**
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/listResult")
+    public PageUtils listResult(@RequestParam Map<String, Object> params){
+
+        List<Assets> list = GlobalUtil.assetsList.stream().filter((Assets assets) -> GlobalUtil.codeList.contains(assets.getAssetsCode())).collect(Collectors.toList());
+
+        int total = list.size();
+
+        PageUtils pageUtils = new PageUtils(list, total);
+        return pageUtils;
+    }
+
 }

@@ -29,6 +29,10 @@ public class GlobalUtil {
     public static List<Assets> assetsList=new ArrayList<>();
 
 
+    /**
+     * 手持机传来的编码
+     */
+    public static List<String> codeList=new ArrayList<>();
 
     /**
      * 已打印的资产信息 list 两集合差集就是未打印的资产
