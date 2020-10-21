@@ -49,9 +49,15 @@ public class APPController {
         List<String> listString = Arrays.asList(codes.split(","));
 
 
-        GlobalUtil.codeList = new ArrayList<>();
-        GlobalUtil.codeList = listString;
 
+        GlobalUtil.codeList.addAll(listString);
+
+    }
+
+    @GetMapping("/clearCode")
+    @ResponseBody
+    public void clearCode() {
+        GlobalUtil.codeList = new ArrayList<>();
     }
 
 }
