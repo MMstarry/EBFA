@@ -113,3 +113,13 @@ function load() {
 function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
 }
+
+/**
+ * 导出
+ * @param id
+ * @returns
+ */
+function Export() {
+    window.location.href = "/downLoadSel";
+
+}

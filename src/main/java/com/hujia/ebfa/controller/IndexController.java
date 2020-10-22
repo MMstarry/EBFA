@@ -114,14 +114,12 @@ public class IndexController {
     @ResponseBody
     public void exportPromotionByExcel07(HttpServletResponse response) throws IOException {
 
-
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
 
         // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
-        String fileName = URLEncoder.encode("盘点", "UTF-8");
+        String fileName = URLEncoder.encode("资产信息", "UTF-8");
         response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
-
 
         EasyExcel.write(response.getOutputStream(), Assets.class).sheet("sheet1").doWrite(GlobalUtil.assetsList);
     }
@@ -188,6 +186,23 @@ public class IndexController {
     public List<String> getDept() {
         List<String> collect = GlobalUtil.assetsList.stream().map(Assets::getUseDepartment).distinct().filter(Objects::nonNull).collect(Collectors.toList());
         return collect;
+    }
+
+    @GetMapping("/downLoadSel")
+    @ResponseBody
+    public void downLoadSel(HttpServletResponse response) throws IOException {
+
+        List<Assets> list = GlobalUtil.assetsList.stream().filter((Assets assets) -> GlobalUtil.codeList.contains(assets.getAssetsCode())).collect(Collectors.toList());
+
+
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+
+        // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+        String fileName = URLEncoder.encode("扫描资产信息", "UTF-8");
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+
+        EasyExcel.write(response.getOutputStream(), Assets.class).sheet("sheet1").doWrite(list);
     }
 
 }
