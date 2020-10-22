@@ -144,7 +144,7 @@ public class IndexController {
     void getRow(String code) {
 
         Assets assets = GlobalUtil.assetsList.stream().filter(o -> o.getAssetsCode().equals(code)).findAny().orElse(null);
-        System.out.println(assets);
+
         GlobalUtil.printedAssetsListAdd(assets);
 
     }

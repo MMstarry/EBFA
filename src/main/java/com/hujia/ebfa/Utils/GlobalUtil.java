@@ -7,10 +7,8 @@ import com.hujia.ebfa.domain.Assets;
 
 import javax.naming.ldap.PagedResultsControl;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @PackageName:com.hujia.ebfa.Utils
@@ -41,7 +39,7 @@ public class GlobalUtil {
 
 
     public static void setAssetsList(List<Assets> assets){
-       assetsList=assets;
+       assetsList=assets.stream().sorted(Comparator.comparing(Assets::getFinancialEntryDate).reversed()).collect(Collectors.toList());
     }
 
 
@@ -73,7 +71,7 @@ public class GlobalUtil {
             EasyExcel.write(fileName, Assets.class).sheet("资产").doWrite(printedAssetsList);
         }
 
-        System.err.println(assetsList.get(0).toString());
+
 
     }
 

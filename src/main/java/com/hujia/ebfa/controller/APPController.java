@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author bin.lee
@@ -30,7 +31,15 @@ public class APPController {
 
         List<Assets> data = GlobalUtil.assetsList;
         Assets assets = data.stream().filter(o -> o.getAssetsCode().equals(code)).findAny().orElse(null);
-        return assets;
+
+
+        if(assets == null) {
+
+            return new Assets();
+        }else {
+            return assets;
+        }
+
     }
 
     @GetMapping("/getHEX")
@@ -39,13 +48,8 @@ public class APPController {
 
         List<Assets> data = GlobalUtil.assetsList;
         Assets assets = data.stream().filter(o -> o.getAssetsCode().equals(Hex.hexStr2Str(code))).findAny().orElse(null);
-        if(assets == null) {
-            System.out.println("------------------------");
-            Assets assets1 = new Assets();
-            assets1.setAssetsCode("0");
-            return assets1;
-        }
         return assets;
+
     }
 
     @PostMapping("/setCode")
@@ -53,6 +57,7 @@ public class APPController {
     public void setCode(@RequestBody String codes) {
 
         List<String> listString = Arrays.asList(codes.split(","));
+
 
         GlobalUtil.codeList.addAll(listString);
 

@@ -35,7 +35,7 @@ public class UploadAssetsListener extends AnalysisEventListener<Assets> {
      */
     @Override
     public void invoke(Assets data, AnalysisContext analysisContext) {
-        //System.err.println("解析到一条数据:{}"+JSON.toJSONString(data));
+
 
 
         if(!("".equals(data.getAssetsCode()))){
@@ -50,10 +50,10 @@ public class UploadAssetsListener extends AnalysisEventListener<Assets> {
      */
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
-        System.err.println("全部数据解析完成！");
-        //System.err.println(list.toString());
+        System.err.println("全部资产数据解析完成！");
 
-        System.err.println(list.size());
+
+
 
 
 

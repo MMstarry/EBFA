@@ -18,7 +18,7 @@ import java.util.List;
  * @Date:2020/10/20 11:35
  */
 public class PrintAssentListener extends AnalysisEventListener<Assets> {
-    public static List<Assets> list = new ArrayList<>();
+    public  List<Assets> list = new ArrayList<>();
 
     /**
      * 这个每一条数据解析都会来调用
@@ -30,7 +30,7 @@ public class PrintAssentListener extends AnalysisEventListener<Assets> {
      */
     @Override
     public void invoke(Assets data, AnalysisContext analysisContext) {
-        //System.err.println("解析到一条数据:{}"+JSON.toJSONString(data));
+
 
 
         if(!("".equals(data.getAssetsCode()))){
@@ -52,7 +52,7 @@ public class PrintAssentListener extends AnalysisEventListener<Assets> {
         }
 
         GlobalUtil.printedAssetsList=list;
-        System.err.println(list.size());
+
 
 
 
