@@ -1,6 +1,7 @@
 package com.hujia.ebfa.controller;
 
 import com.alibaba.excel.util.StringUtils;
+import com.hujia.ebfa.Utils.DateUtils;
 import com.hujia.ebfa.Utils.GlobalUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,16 +35,15 @@ public class LoginController {
         if("admin".equals(username)&&"123".equals(password)){
 
             Date useDate = null ;
-
+            Date websiteDatetime = DateUtils.getWebsiteDatetime("http://www.baidu.com");
             try {
                 useDate = GlobalUtil.dmy_hms.parse(GlobalUtil.useTime);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            } finally {
-                if (new Date().equals(useDate)) {
+                if (useDate.getTime() > websiteDatetime.getTime()) {
                     session.invalidate();
                     return "2";
                 }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
 
             session.setAttribute("userName",username);

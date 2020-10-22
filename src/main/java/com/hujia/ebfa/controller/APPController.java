@@ -1,13 +1,16 @@
 package com.hujia.ebfa.controller;
 
+import com.hujia.ebfa.Utils.DateUtils;
 import com.hujia.ebfa.Utils.Hex;
 import com.hujia.ebfa.Utils.GlobalUtil;
 import com.hujia.ebfa.domain.Assets;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,8 +82,17 @@ public class APPController {
 
     @GetMapping("/getUseDate")
     @ResponseBody
-    public String getUseDate() {
-        return GlobalUtil.useTime;
+    public Long getUseDate() {
+
+        Date websiteDatetime = DateUtils.getWebsiteDatetime("http://www.baidu.com");
+        try {
+            Date useDate = DateUtils.sdf.parse(GlobalUtil.useTime);
+            return websiteDatetime.getTime()- useDate.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return -1l;
+        }
+
     }
 
 }
