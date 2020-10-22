@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.alibaba.fastjson.JSON;
 
 /**
  * @PackageName:com.hujia.ebfa.Listener
@@ -38,9 +37,10 @@ public class UploadAssetsListener extends AnalysisEventListener<Assets> {
 
 
 
-        if(!("".equals(data.getAssetsCode()))){
-            list.add(data);
-        }
+
+        list.add(data);
+
+
     }
 
     /**
@@ -53,32 +53,44 @@ public class UploadAssetsListener extends AnalysisEventListener<Assets> {
         System.err.println("全部资产数据解析完成！");
 
 
-
-
-
-
         //全部固定资产信息
         String fileName =  GlobalUtil.PATH+"\\assets.xlsx";
 
-        File assets=new File(fileName);
+        if(list.size()>0){
 
-        //文件不存在，创建文件
-        if(!assets.exists()){
             try {
-                assets.createNewFile();
-                EasyExcel.write(fileName, Assets.class).sheet("资产").doWrite(list);
-            }catch (Exception e){
 
+
+            File assets=new File(fileName);
+
+
+            Set<Assets> set = new HashSet<>(GlobalUtil.printedAssetsList);
+            Set<Assets> set2 = new HashSet<>(list);
+            set.addAll(set2);
+
+            List<Assets> list_1 = new ArrayList<>(set);
+
+            GlobalUtil.setAssetsList(list_1);
+            GlobalUtil.flag=true;
+
+                //文件不存在，创建文件
+                if(!assets.exists()){
+                    try {
+                        assets.createNewFile();
+                        EasyExcel.write(fileName, Assets.class).sheet("资产").doWrite(list);
+                    }catch (Exception e){
+
+                    }
+                }else {
+                    EasyExcel.write(fileName, Assets.class).sheet("资产").doWrite(list);
+                }
+
+            }catch (Exception e){
+                System.err.println("文件格式不对");
             }
         }
 
-        Set<Assets> set = new HashSet<>(GlobalUtil.printedAssetsList);
-        Set<Assets> set2 = new HashSet<>(list);
-        set.addAll(set2);
 
-        List<Assets> list_1 = new ArrayList<>(set);
-
-        GlobalUtil.setAssetsList(list_1);
 
     }
 }
