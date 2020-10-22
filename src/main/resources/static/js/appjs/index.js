@@ -325,12 +325,12 @@ function getNowFormatDate() {
 }
 
 
-function getDistanceSpecifiedTime(dateTime) {
+function getDistanceSpecifiedTime(t) {
     // 指定日期和时间
-    var EndTime = new Date(dateTime);
-    // 当前网络时间
-    var NowTime = new Date(getNowFormatDate());
-    var t = EndTime.getTime() - NowTime.getTime();
+    // var EndTime = new Date(dateTime);
+    // // 当前网络时间
+    // var NowTime = new Date(getNowFormatDate());
+    // var t = EndTime.getTime() - NowTime.getTime();
     var d = Math.floor(t / 1000 / 60 / 60 / 24);
     var h = Math.floor(t / 1000 / 60 / 60 % 24);
     var m = Math.floor(t / 1000 / 60 % 60);

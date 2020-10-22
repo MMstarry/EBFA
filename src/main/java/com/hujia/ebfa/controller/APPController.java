@@ -87,7 +87,7 @@ public class APPController {
         Date websiteDatetime = DateUtils.getWebsiteDatetime("http://www.baidu.com");
         try {
             Date useDate = DateUtils.sdf.parse(GlobalUtil.useTime);
-            return websiteDatetime.getTime()- useDate.getTime();
+            return useDate.getTime() - websiteDatetime.getTime();
         } catch (ParseException e) {
             e.printStackTrace();
             return -1l;

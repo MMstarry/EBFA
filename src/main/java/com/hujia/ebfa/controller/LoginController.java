@@ -38,7 +38,7 @@ public class LoginController {
             Date websiteDatetime = DateUtils.getWebsiteDatetime("http://www.baidu.com");
             try {
                 useDate = GlobalUtil.dmy_hms.parse(GlobalUtil.useTime);
-                if (useDate.getTime() > websiteDatetime.getTime()) {
+                if (useDate.getTime() < websiteDatetime.getTime()) {
                     session.invalidate();
                     return "2";
                 }
