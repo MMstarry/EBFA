@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
-<link href="/css/bootstrap/bootstrap.min.css"  rel="stylesheet">
+<link href="/css/bootstrap/bootstrap.css"  rel="stylesheet">
 <link href="/css/bootstrap/bootstrap-table.min.css"  rel="stylesheet">
 <link href="/css/bootstrap/bootstrap-table.css"  rel="stylesheet">
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -78,10 +78,11 @@
 								<td></td>
 								<td>
 									<div class="columns pull-left">
+										<button class="btn btn-success" onclick="reLoad()">查询</button>
+										<button class="btn btn-success" onclick="clear1()">清空</button>
 									<button class="btn btn-success" onclick="Export()">下载</button>
 									<button  class="btn btn-primary" onclick="exportAsset()">打印</button>
-									<button class="btn btn-success" onclick="reLoad()">查询</button>
-									<button class="btn btn-success" onclick="clear1()">清空</button>
+
 								</div>
 								</td>
 								<td></td>
