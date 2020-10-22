@@ -39,6 +39,9 @@ public class APPController {
 
         List<Assets> data = GlobalUtil.assetsList;
         Assets assets = data.stream().filter(o -> o.getAssetsCode().equals(Hex.hexStr2Str(code))).findAny().orElse(null);
+        if(assets == null) {
+            return new Assets();
+        }
         return assets;
     }
 

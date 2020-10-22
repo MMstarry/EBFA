@@ -55,7 +55,7 @@ public class IndexController {
 
 
 
-    @GetMapping({ "/user" })
+    @GetMapping("/user")
     String user() {
         return "user";
     }
