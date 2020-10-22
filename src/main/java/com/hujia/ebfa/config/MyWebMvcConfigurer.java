@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
+ * 过滤器
  * @author bin.lee
  * @date 2020/10/21 0021 15:34
  * @Email: libinjava@163.com
@@ -24,7 +25,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 
         registry.addInterceptor(loginHandlerInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/login","/js/**","/img/**","/css/**","/fonts/**","/vendor/**");
+                .excludePathPatterns("/login","/js/**","/img/**","/css/**","/fonts/**","/vendor/**","/app/**");
 
     }
 
