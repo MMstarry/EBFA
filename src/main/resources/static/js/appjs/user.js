@@ -10,25 +10,44 @@ $(function () {
             formData.append("file", $("#upFile")[0].files[0]);
             formData.append("name", name);
 
-            $.ajax({
-                url: './importExp',
-                type: 'POST',
-                async: false,
-                data: formData,
-                // 告诉jQuery不要去处理发送的数据
-                processData: false,
-                // 告诉jQuery不要去设置Content-Type请求头
-                contentType: false,
-                beforeSend: function () {
-                    console.log("正在进行，请稍候");
-                },
-                success: function (responseStr) {
 
-                }
-            });
-            $("#upFile").val('')
 
-            reLoad();
+            var index=name.lastIndexOf(".");
+            var type=name.substr(index);
+
+            if(type==='.xls' ||type==='.xlsx')
+            {
+                $.ajax({
+                    url: '/importExp',
+                    type: 'POST',
+                    async: false,
+                    data: formData,
+
+                    // 告诉jQuery不要去处理发送的数据
+                    processData: false,
+                    // 告诉jQuery不要去设置Content-Type请求头
+                    contentType: false,
+                    mimeType:"multipart/form-data",
+                    beforeSend: function () {
+                        console.log("正在进行，请稍候");
+                    },
+                    success: function (responseStr) {
+                        if(responseStr==="success"){
+                            $("#upFile").val('');
+
+                            reLoad();
+                        }else {
+                            layer.msg("请重新选择文件模板");
+                        }
+                    }
+                });
+
+            }else {
+                layer.msg("文件格式错误，请重新导入");
+            }
+
+
+
         }
     });
 
