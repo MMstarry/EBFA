@@ -7,6 +7,8 @@ import com.hujia.ebfa.domain.Assets;
 
 import javax.naming.ldap.PagedResultsControl;
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,6 +22,11 @@ import java.util.stream.Collectors;
 public class GlobalUtil {
 
     public static String PATH="";
+
+    public static String useTime = "2020-12-30 23:59:59";
+
+    public static SimpleDateFormat dmy_hms = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
 
     /**
      * 全部资产信息 list 网页端展示数据

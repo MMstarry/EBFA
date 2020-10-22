@@ -78,14 +78,15 @@ function login() {
         data: $('#signupForm').serialize(),
         success: function (r) {
 
-           parent.location.href = '/user';
 
-            if (r.code == 0) {
-                // var index = layer.load(1, {
-                //     shade: [0.1,'#fff'] //0.1透明度的白色背景
-                // });
 
+            if (r == 0) {
+                parent.location.href = '/user';
            // layer.msg(r.msg);
+            } else if (r == 1) {
+                layer.msg("用户名或密码错误！");
+            } else {
+                layer.msg("账号已到期，请联系安徽互佳科技科技有限公司续费");
             }
         }
     });

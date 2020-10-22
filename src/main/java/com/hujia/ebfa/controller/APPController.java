@@ -70,4 +70,17 @@ public class APPController {
         return 200;
     }
 
+    @GetMapping("/setUseDate")
+    @ResponseBody
+    public int setUseDate(String time) {
+        GlobalUtil.useTime = time;
+        return 200;
+    }
+
+    @GetMapping("/getUseDate")
+    @ResponseBody
+    public String getUseDate() {
+        return GlobalUtil.useTime;
+    }
+
 }

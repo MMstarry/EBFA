@@ -87,7 +87,10 @@ public class IndexController {
             list = list.stream().filter(e -> e.getAssetsName().indexOf(params.get("assetsName").toString())!=-1).collect(Collectors.toList());
         }
         if (!params.get("acquiredDate").equals("") ) {
-            list = list.stream().filter(e -> e.getFinancialEntryDate().equals(params.get("acquiredDate"))).collect(Collectors.toList());
+                list = list.stream().filter(e -> e.getFinancialEntryDate().indexOf(params.get("acquiredDate").toString())!=-1).collect(Collectors.toList());
+        }
+        if (!params.get("useDepartment").equals("") ) {
+                list = list.stream().filter(e -> params.get("useDepartment").equals(e.getUseDepartment())).collect(Collectors.toList());
         }
 
         int total = list.size();
@@ -169,6 +172,20 @@ public class IndexController {
 
         PageUtils pageUtils = new PageUtils(list, total);
         return pageUtils;
+    }
+
+    @GetMapping("/getSpec")
+    @ResponseBody
+    public List<String> getSpec() {
+        List<String> collect = GlobalUtil.assetsList.stream().map(Assets::getClassification).distinct().filter(Objects::nonNull).collect(Collectors.toList());
+        return collect;
+    }
+
+    @GetMapping("/getDept")
+    @ResponseBody
+    public List<String> getDept() {
+        List<String> collect = GlobalUtil.assetsList.stream().map(Assets::getUseDepartment).distinct().filter(Objects::nonNull).collect(Collectors.toList());
+        return collect;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.hujia.ebfa.controller;
 
 import com.alibaba.excel.util.StringUtils;
+import com.hujia.ebfa.Utils.GlobalUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -29,6 +32,19 @@ public class LoginController {
                         HttpSession session){
         //验证用户名和密码，输入正确，跳转到dashboard
         if("admin".equals(username)&&"123".equals(password)){
+
+            Date useDate = null ;
+
+            try {
+                useDate = GlobalUtil.dmy_hms.parse(GlobalUtil.useTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } finally {
+                if (new Date().equals(useDate)) {
+                    session.invalidate();
+                    return "2";
+                }
+            }
 
             session.setAttribute("userName",username);
             System.out.println("----" + username);

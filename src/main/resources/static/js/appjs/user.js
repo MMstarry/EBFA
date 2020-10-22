@@ -1,7 +1,9 @@
 var prefix = ""
 $(function () {
     load();
-
+    setTime();
+    initTrayTypeSel();
+    initDeptSel();
 
     $("#upFile").bind('input porpertychange', function () {
         if ($("#upFile").val() != '') {
@@ -67,6 +69,7 @@ function load() {
                         classification: $('#classification').val(),
                         assetsName: $('#assetsName').val(),
                         acquiredDate: $('#acquiredDate').val(),
+                        useDepartment: $('#useDepartment').val(),
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -181,6 +184,7 @@ function clear1() {
     $('#classification').val("");
     $('#assetsName').val("");
     $('#acquiredDate').val("");
+    $('#useDepartment').val("");
     reLoad();
 }
 
@@ -207,7 +211,7 @@ function scanning() {
         title: '扫描列表',
         maxmin: true,
         shadeClose: false, // 点击遮罩关闭层
-        area: ['800px', '600px'],
+        area: ['900px', '450px'],
         content: '/scan' // iframe的url
     });
 }
@@ -277,4 +281,91 @@ function edit(row) {
 function Export() {
     window.location.href = "/downLoad";
 
+}
+
+/**
+ 获取网络时间
+ */
+function getNowFormatDate() {
+    var currentdate;
+    $.ajax({
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        url: 'http://quan.suning.com/getSysTime.do',
+        success: function(data) {
+            var data = data.sysTime2;
+            currentdate = data;
+
+        }
+    })
+
+    return currentdate
+}
+
+
+function getDistanceSpecifiedTime(dateTime) {
+    // 指定日期和时间
+    var EndTime = new Date(dateTime);
+    // 当前网络时间
+    var NowTime = new Date(getNowFormatDate());
+    var t = EndTime.getTime() - NowTime.getTime();
+    var d = Math.floor(t / 1000 / 60 / 60 / 24);
+    var h = Math.floor(t / 1000 / 60 / 60 % 24);
+    var m = Math.floor(t / 1000 / 60 % 60);
+    var s = Math.floor(t / 1000 % 60);
+    var html = d + " 天" + h + " 时";
+
+    return html;
+}
+
+
+
+function setTime() {
+
+    $.ajax({
+        type: 'GET',
+        async: false,
+        url: '/app/getUseDate',
+        success: function(data) {
+            var day = getDistanceSpecifiedTime(data);
+            $('#textTime').html(day);
+        }
+    })
+
+
+}
+
+function initTrayTypeSel() {
+    var html = "<option value=''>请选择资产类型</option>";
+    $.ajax({
+        url: '/getSpec',
+        success: function (data) {
+            //加载数据
+            for (var i = 0; i < data.length; i++) {
+                html += '<option value="' + data[i] + '" >' + data[i] + '</option>'
+            }
+            $("#classification").append(html);
+            // $("#assetType").chosen({
+            //     maxHeight: 200
+            // });
+        }
+    })
+}
+
+function initDeptSel() {
+    var html = "<option value=''>请选择使用部门</option>";
+    $.ajax({
+        url: '/getDept',
+        success: function (data) {
+            //加载数据
+            for (var i = 0; i < data.length; i++) {
+                html += '<option value="' + data[i] + '" >' + data[i] + '</option>'
+            }
+            $("#useDepartment").append(html);
+            // $("#assetType").chosen({
+            //     maxHeight: 200
+            // });
+        }
+    })
 }
