@@ -52,9 +52,9 @@ public class IndexController {
 
 
 
-    @GetMapping("/user")
+    @GetMapping("/index")
     String user() {
-        return "user";
+        return "index";
     }
 
     /**

@@ -81,7 +81,7 @@ function login() {
 
 
             if (r == 0) {
-                parent.location.href = '/user';
+                parent.location.href = '/index';
            // layer.msg(r.msg);
             } else if (r == 1) {
                 layer.msg("用户名或密码错误！");
