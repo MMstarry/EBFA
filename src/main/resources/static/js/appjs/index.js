@@ -38,14 +38,16 @@ $(function () {
                             $("#upFile").val('');
 
                             reLoad();
+                            initTrayTypeSel();
+                            initDeptSel();
                         }else {
-                            layer.msg("请重新选择文件模板");
+                            layer.alert("请重新选择文件模板");
                         }
                     }
                 });
 
             }else {
-                layer.msg("文件格式错误，请重新导入");
+                layer.alert("文件格式错误，请重新导入");
             }
 
 

@@ -45,7 +45,7 @@ public class PrintAssentListener extends AnalysisEventListener<Assets> {
      */
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
-        System.err.println("已打印数据解析完成！");
+        System.err.println("已写入标签数据解析完成！");
 
         for(Assets assets:list){
             assets.setFlag(true);

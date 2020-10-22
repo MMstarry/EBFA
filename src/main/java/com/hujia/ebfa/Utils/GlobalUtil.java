@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
  */
 public class GlobalUtil {
 
+    public static boolean flag=false;
+
     public static String PATH="";
 
     public static String useTime = "2020-12-30 23:59:59";
@@ -133,6 +135,7 @@ public class GlobalUtil {
             }
         }
 
+        flag=false;
 
 
 

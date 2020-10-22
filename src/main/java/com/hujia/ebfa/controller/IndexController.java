@@ -2,7 +2,7 @@ package com.hujia.ebfa.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.hujia.ebfa.Listener.UploadAssetsListener;
-import com.hujia.ebfa.Utils.ExcelUtils;
+
 import com.hujia.ebfa.Utils.GlobalUtil;
 import com.hujia.ebfa.domain.Assets;
 import com.hujia.ebfa.Utils.Hex;
@@ -40,8 +40,13 @@ public class IndexController {
     @ResponseBody
     public String importExp(@RequestParam("file") MultipartFile file) throws IOException {
 
-        if(ExcelUtils.checkExeclRow(file.getInputStream())){
+
+
             EasyExcel.read(file.getInputStream(), Assets.class, new UploadAssetsListener()).sheet().doRead();
+
+
+        if(GlobalUtil.flag){
+            GlobalUtil.flag=false;
             return "success";
         }else {
             return "fail";
