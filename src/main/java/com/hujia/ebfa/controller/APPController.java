@@ -40,7 +40,10 @@ public class APPController {
         List<Assets> data = GlobalUtil.assetsList;
         Assets assets = data.stream().filter(o -> o.getAssetsCode().equals(Hex.hexStr2Str(code))).findAny().orElse(null);
         if(assets == null) {
-            return new Assets();
+            System.out.println("------------------------");
+            Assets assets1 = new Assets();
+            assets1.setAssetsCode("0");
+            return assets1;
         }
         return assets;
     }
