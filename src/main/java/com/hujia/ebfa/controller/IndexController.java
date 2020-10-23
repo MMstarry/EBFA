@@ -114,6 +114,8 @@ public class IndexController {
     @ResponseBody
     public void exportPromotionByExcel07(HttpServletResponse response) throws IOException {
 
+        response.addHeader("Access-Cntrol-Allow-Origin","*");
+
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
 
@@ -169,8 +171,8 @@ public class IndexController {
         List<Assets> list = GlobalUtil.assetsList.stream().filter((Assets assets) -> GlobalUtil.codeList.contains(assets.getAssetsCode())).collect(Collectors.toList());
 
         int total = list.size();
-
         PageUtils pageUtils = new PageUtils(list, total);
+
         return pageUtils;
     }
 
@@ -193,7 +195,7 @@ public class IndexController {
     public void downLoadSel(HttpServletResponse response) throws IOException {
 
         List<Assets> list = GlobalUtil.assetsList.stream().filter((Assets assets) -> GlobalUtil.codeList.contains(assets.getAssetsCode())).collect(Collectors.toList());
-
+        response.addHeader("Access-Cntrol-Allow-Origin","*");
 
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
@@ -203,6 +205,18 @@ public class IndexController {
         response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
 
         EasyExcel.write(response.getOutputStream(), Assets.class).sheet("sheet1").doWrite(list);
+    }
+
+    @PostMapping("/getList")
+    @ResponseBody
+    public List<Assets> getList() {
+
+        return GlobalUtil.assetsList.subList(0,10);
+    }
+
+    @GetMapping("/print")
+    String print() {
+        return "print";
     }
 
 }
