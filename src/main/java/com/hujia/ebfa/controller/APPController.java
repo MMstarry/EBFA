@@ -66,6 +66,17 @@ public class APPController {
 
     }
 
+    @PostMapping("/getCodesDetail")
+    @ResponseBody
+    public List<Assets> getCodesDetail(@RequestBody String codes) {
+
+        List<String> listString = Arrays.asList(codes.split(","));
+
+        List<Assets> list = GlobalUtil.assetsList.stream().filter((Assets assets) -> listString.contains(assets.getAssetsCode())).collect(Collectors.toList());
+
+        return list;
+    }
+
     @GetMapping("/clearCode")
     @ResponseBody
     public int clearCode() {

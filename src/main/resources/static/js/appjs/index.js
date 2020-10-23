@@ -304,6 +304,17 @@ function Export() {
 
 }
 
+function printAsset() {
+    layer.open({
+        type: 2,
+        title: '打印条形码',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['350px', '450px'],
+        content: '/print' // iframe的url
+    });
+}
+
 /**
  获取网络时间
  */
