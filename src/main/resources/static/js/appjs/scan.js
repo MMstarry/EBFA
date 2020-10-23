@@ -1,9 +1,31 @@
 
+var count=0;
 $(function () {
+
     load();
+    setInterval(check,2000);
+
+
+
 });
 
+function check() {
+
+    $.ajax({
+        type: "GET",
+        url: "/listResultCount",
+        success: function (r) {
+            if(r!==count){
+                reLoad();
+            }
+
+        }
+    });
+}
+
+
 function load() {
+
     $('#exampleTable')
         .bootstrapTable(
             {
@@ -107,6 +129,10 @@ function load() {
                 // formatNoMatches: function () {
                 //     return "没有记录";
                 // }
+
+                onLoadSuccess:function(data){
+                    count=data.total;
+                }
             });
 }
 

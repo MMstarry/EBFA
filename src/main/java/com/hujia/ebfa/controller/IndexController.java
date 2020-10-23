@@ -160,6 +160,15 @@ public class IndexController {
         return "scan";
     }
 
+    @ResponseBody
+    @GetMapping("/listResultCount")
+    public int listResultCount(@RequestParam Map<String, Object> params){
+        List<Assets> list = GlobalUtil.assetsList.stream().filter((Assets assets) -> GlobalUtil.codeList.contains(assets.getAssetsCode())).collect(Collectors.toList());
+
+        return list.size();
+    }
+
+
     /**
      * @param params
      * @return
