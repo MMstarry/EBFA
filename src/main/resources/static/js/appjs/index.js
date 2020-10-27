@@ -79,6 +79,7 @@ function load() {
                 pageSize: 10, // 如果设置了分页，每页数据条数
                 pageNumber: 1, // 如果设置了分布，首页页码
                 //search : true, // 是否显示搜索框
+                // pageList: [10, 25, 50, 100,200,500,1000],
                 showColumns: false, // 是否显示内容下拉框（选择显示的列）
                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
                 queryParams: function (params) {
@@ -305,14 +306,20 @@ function Export() {
 }
 
 function printAsset() {
-    layer.open({
-        type: 2,
-        title: '打印条形码',
-        maxmin: true,
-        shadeClose: false, // 点击遮罩关闭层
-        area: ['350px', '450px'],
-        content: '/print' // iframe的url
-    });
+
+    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+    if (rows.length == 0) {
+       layer.msg("请选择要打印的数据");
+    } else {
+        layer.open({
+            type: 2,
+            title: '打印条形码',
+            maxmin: true,
+            shadeClose: false, // 点击遮罩关闭层
+            area: ['350px', '450px'],
+            content: '/print' // iframe的url
+        });
+    }
 }
 
 /**

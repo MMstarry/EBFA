@@ -17,15 +17,10 @@ $().ready(function() {
 		// });
 
 	var rows = parent.$('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-	if (rows.length == 0) {
-		parent.layer.msg("请选择要打印的数据");
-		var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-		parent.layer.close(index);
-	} else {
+
 		for (var i = 0; i < rows.length; i ++) {
 			generateQR(rows[i],i);
 		}
-
 
 		$("#QR").printThis({
 			debug: false,
@@ -40,7 +35,6 @@ $().ready(function() {
 			formValues: false
 		});
 
-	}
 
 });
 
