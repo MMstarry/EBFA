@@ -80,7 +80,9 @@ public class IndexController {
 
         if (list.size() == 0) return null;
         if (!params.get("assetsCode").equals("") ) {
-           list = list.stream().filter(e -> e.getAssetsCode().equals(params.get("assetsCode"))).collect(Collectors.toList());
+
+            String code = params.get("assetsCode").toString().trim();
+           list = list.stream().filter(e -> e.getAssetsCode().equals(code)).collect(Collectors.toList());
         }
         if (!params.get("classification").equals("")) {
             list = list.stream().filter(e -> e.getClassification().equals(params.get("classification"))).collect(Collectors.toList());
@@ -188,14 +190,14 @@ public class IndexController {
     @GetMapping("/getSpec")
     @ResponseBody
     public List<String> getSpec() {
-        List<String> collect = GlobalUtil.assetsList.stream().map(Assets::getClassification).distinct().filter(Objects::nonNull).collect(Collectors.toList());
+        List<String> collect = GlobalUtil.assetsList.stream().filter((Assets assets) -> !"".equals(assets.getClassification())).map(Assets::getClassification).distinct().filter(Objects::nonNull).collect(Collectors.toList());
         return collect;
     }
 
     @GetMapping("/getDept")
     @ResponseBody
     public List<String> getDept() {
-        List<String> collect = GlobalUtil.assetsList.stream().map(Assets::getUseDepartment).distinct().filter(Objects::nonNull).collect(Collectors.toList());
+        List<String> collect = GlobalUtil.assetsList.stream().filter((Assets assets) -> !"".equals(assets.getUseDepartment())).map(Assets::getUseDepartment).distinct().filter(Objects::nonNull).collect(Collectors.toList());
         return collect;
     }
 
