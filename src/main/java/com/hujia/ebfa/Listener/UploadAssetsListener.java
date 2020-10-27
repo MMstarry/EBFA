@@ -36,9 +36,13 @@ public class UploadAssetsListener extends AnalysisEventListener<Assets> {
     public void invoke(Assets data, AnalysisContext analysisContext) {
 
 
+        if("".equals(data.getAssetsCode())||data.getAssetsCode()==null){
+            System.err.println("空");
+        }else {
+            list.add(data);
+        }
 
 
-        list.add(data);
 
 
     }

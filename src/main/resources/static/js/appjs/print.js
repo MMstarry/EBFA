@@ -41,28 +41,28 @@ function generateQR(date,i) {
 	var spec =date.spec===null?"&nbsp;&nbsp;":date.spec
 	var user = date.user===null?"&nbsp;&nbsp;":date.user
 //margin: 0;padding: 0;
-	var html = "<div style=\"font-size: 1px;\">\n" +
-		"\n" +
-		"<div style=\"width: 220px;\">"+"<table style='width: 220px;height: 150px;margin-top: 12px' border=\"1\" cellspacing=\"0\"  cellpadding=\"0\" >" +
-		"<tr style='height: 15px'><td colspan='2'>安徽省教育厅本级固定资产标签</td></tr><tr style='height: 15px'><td colspan='2'>"+
+	var html = "<div style=\"page-break-after:always;\">\n" 
+
+		+"<table style='width: 100%;height: 100%;' border=\"1\" cellspacing=\"0\"  cellpadding=\"0\" >" +
+		"<tr style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'><td colspan='2'>安徽省教育厅本级固定资产标签</td></tr><tr style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'><td colspan='2'>"+
 		"使用部门："+date.useDepartment + "&nbsp;&nbsp;" +
-		"使用人："+user + "</td></tr><tr style='height: 15px'><td colspan='2'>" +
-		"资产名称："+date.assetsName + "</td></tr><tr style='height: 15px'><td colspan='2'>" +
+		"使用人："+user + "</td></tr><tr style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'><td colspan='2'>" +
+		"资产名称："+date.assetsName + "</td></tr><tr style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'><td colspan='2'>" +
 		"品牌："+ brand + "&nbsp;&nbsp;" + "</td>" +
 		"</tr>" +
 		// "<tr style='height: 15px'><td colspan='2'>" +
 		// "型号："+ spec+ "&nbsp;&nbsp;" +
 		// "</td></tr>" +
-		"<tr style='height: 15px'><td>" +
+		"<tr style='width:17%;text-align:left;font-size: 8px;height:14.3%;white-space: nowrap;font-weight: 600;'><td>" +
 		"价值："+ date.value +
 		"</td>" +
 		"<td style='height: 60px;width: 60px' rowspan='3'><div id='code"+i+"'>\n" +
 		"<canvas id='c"+i+"' style='display: none'></canvas>"+
 		"<img id='img"+i+"' style='display: block'/>"+
 		"</div></td>" +
-		"</tr><tr><td style='height: 20px'>"+
+		"</tr><tr><td style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'>"+
 		"购置日期："+date.financialEntryDate + "</td></tr>"+"</div>\n" +
-		"<tr><td style='height: 20px'>" +
+		"<tr><td style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'>" +
 		"&nbsp;&nbsp;" + date.assetsCode +
 		"</td></tr>" +
 	"</tr></table>" +
