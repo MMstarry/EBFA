@@ -3,34 +3,45 @@
 $().ready(function() {
 	$("#div_QR").html("");
 
-		$.ajax({
-			type : 'POST',
-			async:false,
-			// data : {
-			// 	"num" : printNum
-			// },
-			url : '/getList',
-			success : function(r) {
-				for (var i = 0; i < r.length; i ++) {
-					generateQR(r[i],i);
-				}
-			}
+		//
+		// $.ajax({
+		// 	type : 'POST',
+		// 	async:false,
+		// 	// data : {
+		// 	// 	"num" : printNum
+		// 	// },
+		// 	url : '/getList',
+		// 	success : function(r) {
+		//
+		// 	}
+		// });
+
+	var rows = parent.$('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	if (rows.length == 0) {
+		parent.layer.msg("请选择要打印的数据");
+		var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+		parent.layer.close(index);
+	} else {
+		for (var i = 0; i < rows.length; i ++) {
+			generateQR(rows[i],i);
+		}
+
+
+		$("#QR").printThis({
+			debug: false,
+			importCSS: false,
+			importStyle: false,
+			printContainer: false,
+			//    loadCSS: "/Content/Themes/Default/style.css",
+			pageTitle: "条形码",
+			removeInline: false,
+			printDelay: 0,
+			header: null,
+			formValues: false
 		});
 
+	}
 
-
-	$("#QR").printThis({
-		debug: false,
-		importCSS: false,
-		importStyle: false,
-		printContainer: false,
-		//    loadCSS: "/Content/Themes/Default/style.css",
-		pageTitle: "条形码",
-		removeInline: false,
-		printDelay: 0,
-		header: null,
-		formValues: false
-	});
 });
 
 
