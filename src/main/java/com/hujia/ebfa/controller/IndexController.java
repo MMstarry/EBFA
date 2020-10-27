@@ -220,7 +220,7 @@ public class IndexController {
     @ResponseBody
     public List<Assets> getList() {
 
-        return GlobalUtil.assetsList.subList(0,10);
+        return GlobalUtil.assetsList.subList(1,5);
     }
 
     @GetMapping("/print")
