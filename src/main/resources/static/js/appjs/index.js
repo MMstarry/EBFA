@@ -316,7 +316,7 @@ function printAsset() {
             title: '打印条形码',
             maxmin: true,
             shadeClose: false, // 点击遮罩关闭层
-            area: ['350px', '450px'],
+            area: ['600px', '400px'],
             content: '/print' // iframe的url
         });
     }

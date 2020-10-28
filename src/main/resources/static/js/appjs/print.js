@@ -43,32 +43,32 @@ function generateQR(date,i) {
 
 	// $("#qrcode").html("");
 	var brand =date.brand===null?"&nbsp;&nbsp;":date.brand
-	var spec =date.spec===null?"&nbsp;&nbsp;":date.spec
+	var spec =date.spec===null?"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;":date.spec
 	var user = date.user===null?"&nbsp;&nbsp;":date.user
 //margin: 0;padding: 0;
-	var html = "<div style=\"page-break-after:always;\">\n" 
+	var html = "<div style='page-break-after:always;'>\n"
 
 		+"<table style='width: 100%;height: 100%;' border=\"1\" cellspacing=\"0\"  cellpadding=\"0\" >" +
 		"<tr style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'><td colspan='2'>安徽省教育厅本级固定资产标签</td></tr><tr style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'><td colspan='2'>"+
 		"使用部门："+date.useDepartment + "&nbsp;&nbsp;" +
 		"使用人："+user + "</td></tr><tr style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'><td colspan='2'>" +
-		"资产名称："+date.assetsName + "</td></tr><tr style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'><td colspan='2'>" +
+		"资产名称："+date.assetsName + "</td></tr><tr style='width:17%;text-align:left;font-size: 12px;height:7.0%;white-space: nowrap;font-weight: 600;'><td colspan='2'>" +
 		"品牌："+ brand + "&nbsp;&nbsp;" + "</td>" +
 		"</tr>" +
-		// "<tr style='height: 15px'><td colspan='2'>" +
-		// "型号："+ spec+ "&nbsp;&nbsp;" +
-		// "</td></tr>" +
-		"<tr style='width:17%;text-align:left;font-size: 8px;height:14.3%;white-space: nowrap;font-weight: 600;'><td>" +
+		"<tr style='width:17%;text-align:left;font-size: 12px;height:7.3%;white-space: nowrap;font-weight: 600;'><td colspan='2'>" +
+		"型号："+ spec+ "&nbsp;&nbsp;" +
+		"</td></tr>" +
+		"<tr style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'><td>" +
 		"价值："+ date.value +
 		"</td>" +
-		"<td style='height: 60px;width: 60px' rowspan='3'><div id='code"+i+"'>\n" +
+		"<td style='height: 50px;width: 50px' rowspan='3'><div id='code"+i+"' style='text-align: center'>\n" +
 		"<canvas id='c"+i+"' style='display: none'></canvas>"+
-		"<img id='img"+i+"' style='display: block'/>"+
+		"<img id='img"+i+"' style='display:inline-block;'/>"+
 		"</div></td>" +
 		"</tr><tr><td style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'>"+
 		"购置日期："+date.financialEntryDate + "</td></tr>"+"</div>\n" +
 		"<tr><td style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'>" +
-		"&nbsp;&nbsp;" + date.assetsCode +
+		"编号:&nbsp;&nbsp;" + date.assetsCode +
 		"</td></tr>" +
 	"</tr></table>" +
 	"</div>"
@@ -78,8 +78,8 @@ function generateQR(date,i) {
 	var qrcode= $("#c"+i).qrcode({
 		render: "canvas",
 		text: date.assetsCode,
-		width: 60,
-		height: 60,
+		width: 50,
+		height: 50,
 		colorDark : '#000000',
 		colorLight : '#ffffff',
 		// correctLevel : QRCode.CorrectLevel.H
