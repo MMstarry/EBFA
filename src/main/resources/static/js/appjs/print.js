@@ -43,10 +43,10 @@ function generateQR(date,i) {
 
 	// $("#qrcode").html("");
 	var brand =date.brand===null?"&nbsp;&nbsp;":date.brand
-	var spec =date.spec===null?"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;":date.spec
+	var spec =date.spec===null?"&nbsp;&nbsp;":date.spec
 	var user = date.user===null?"&nbsp;&nbsp;":date.user
 //margin: 0;padding: 0;
-	var html = "<div style='page-break-after:always;'>\n"
+	var html = "<div style='page-break-after:always; margin-top: 8px;'>\n"
 
 		+"<table style='width: 100%;height: 100%;' border=\"1\" cellspacing=\"0\"  cellpadding=\"0\" >" +
 		"<tr style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'><td colspan='2'>安徽省教育厅本级固定资产标签</td></tr><tr style='width:17%;text-align:left;font-size: 12px;height:14.3%;white-space: nowrap;font-weight: 600;'><td colspan='2'>"+
@@ -71,7 +71,7 @@ function generateQR(date,i) {
 		"编号:&nbsp;&nbsp;" + date.assetsCode +
 		"</td></tr>" +
 	"</tr></table>" +
-	"</div>"
+	"</div>";
 	$("#QR").append(html);
 
 

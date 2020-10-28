@@ -161,10 +161,11 @@ function load() {
                     },
                     {
                         field: 'financialEntryDate',
+                        align: "center",
                         title: '购置时间'
                     },
 
-                    {
+                   /* {
                         field : 'flag',
                         title: '是否已写入',
                         formatter: function (value) {
@@ -190,7 +191,8 @@ function load() {
                             if (value === true) return f;
                             else return e;
                         }
-                    }],
+                    }*/
+                    ],
                 formatNoMatches: function () {
                     return "没有记录";
                 }
